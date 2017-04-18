@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheney.dao.consultrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.cheney.entity.consultrecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customId" property="customId" jdbcType="INTEGER" />
+    <result column="consultManId" property="consultManId" jdbcType="INTEGER" />
+    <result column="consultStatu" property="consultStatu" jdbcType="VARCHAR" />
+    <result column="consultDate" property="consultDate" jdbcType="DATE" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customId, consultManId, consultStatu, consultDate, result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from consultrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from consultrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cheney.entity.consultrecord" >
+    insert into consultrecord (id, customId, consultManId, 
+      consultStatu, consultDate, result
+      )
+    values (#{id,jdbcType=INTEGER}, #{customId,jdbcType=INTEGER}, #{consultManId,jdbcType=INTEGER}, 
+      #{consultStatu,jdbcType=VARCHAR}, #{consultDate,jdbcType=DATE}, #{result,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheney.entity.consultrecord" >
+    insert into consultrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customId != null" >
+        customId,
+      </if>
+      <if test="consultManId != null" >
+        consultManId,
+      </if>
+      <if test="consultStatu != null" >
+        consultStatu,
+      </if>
+      <if test="consultDate != null" >
+        consultDate,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customId != null" >
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="consultManId != null" >
+        #{consultManId,jdbcType=INTEGER},
+      </if>
+      <if test="consultStatu != null" >
+        #{consultStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="consultDate != null" >
+        #{consultDate,jdbcType=DATE},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheney.entity.consultrecord" >
+    update consultrecord
+    <set >
+      <if test="customId != null" >
+        customId = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="consultManId != null" >
+        consultManId = #{consultManId,jdbcType=INTEGER},
+      </if>
+      <if test="consultStatu != null" >
+        consultStatu = #{consultStatu,jdbcType=VARCHAR},
+      </if>
+      <if test="consultDate != null" >
+        consultDate = #{consultDate,jdbcType=DATE},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheney.entity.consultrecord" >
+    update consultrecord
+    set customId = #{customId,jdbcType=INTEGER},
+      consultManId = #{consultManId,jdbcType=INTEGER},
+      consultStatu = #{consultStatu,jdbcType=VARCHAR},
+      consultDate = #{consultDate,jdbcType=DATE},
+      result = #{result,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

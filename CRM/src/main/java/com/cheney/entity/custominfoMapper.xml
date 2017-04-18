@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheney.dao.custominfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cheney.entity.custominfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customId" property="customId" jdbcType="INTEGER" />
+    <result column="followManId" property="followManId" jdbcType="INTEGER" />
+    <result column="statu" property="statu" jdbcType="VARCHAR" />
+    <result column="startDate" property="startDate" jdbcType="DATE" />
+    <result column="lastFollowDate" property="lastFollowDate" jdbcType="DATE" />
+    <result column="planDate" property="planDate" jdbcType="DATE" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customId, followManId, statu, startDate, lastFollowDate, planDate, mark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from custominfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from custominfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cheney.entity.custominfo" >
+    insert into custominfo (id, customId, followManId, 
+      statu, startDate, lastFollowDate, 
+      planDate, mark)
+    values (#{id,jdbcType=INTEGER}, #{customId,jdbcType=INTEGER}, #{followManId,jdbcType=INTEGER}, 
+      #{statu,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{lastFollowDate,jdbcType=DATE}, 
+      #{planDate,jdbcType=DATE}, #{mark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cheney.entity.custominfo" >
+    insert into custominfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customId != null" >
+        customId,
+      </if>
+      <if test="followManId != null" >
+        followManId,
+      </if>
+      <if test="statu != null" >
+        statu,
+      </if>
+      <if test="startDate != null" >
+        startDate,
+      </if>
+      <if test="lastFollowDate != null" >
+        lastFollowDate,
+      </if>
+      <if test="planDate != null" >
+        planDate,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customId != null" >
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="followManId != null" >
+        #{followManId,jdbcType=INTEGER},
+      </if>
+      <if test="statu != null" >
+        #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="lastFollowDate != null" >
+        #{lastFollowDate,jdbcType=DATE},
+      </if>
+      <if test="planDate != null" >
+        #{planDate,jdbcType=DATE},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cheney.entity.custominfo" >
+    update custominfo
+    <set >
+      <if test="customId != null" >
+        customId = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="followManId != null" >
+        followManId = #{followManId,jdbcType=INTEGER},
+      </if>
+      <if test="statu != null" >
+        statu = #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        startDate = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="lastFollowDate != null" >
+        lastFollowDate = #{lastFollowDate,jdbcType=DATE},
+      </if>
+      <if test="planDate != null" >
+        planDate = #{planDate,jdbcType=DATE},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cheney.entity.custominfo" >
+    update custominfo
+    set customId = #{customId,jdbcType=INTEGER},
+      followManId = #{followManId,jdbcType=INTEGER},
+      statu = #{statu,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=DATE},
+      lastFollowDate = #{lastFollowDate,jdbcType=DATE},
+      planDate = #{planDate,jdbcType=DATE},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

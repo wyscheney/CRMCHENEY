@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cheney.dao.jobinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cheney.entity.jobinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="CHAR" />
+    <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>
