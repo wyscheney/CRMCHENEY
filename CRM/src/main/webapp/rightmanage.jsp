@@ -23,19 +23,24 @@
 		$('#rt-dg').edatagrid({
 			saveUrl: 'saveRight.do',
 		    updateUrl: 'updateRight.do',
-		    destroyUrl: 'deleteRight.do'
-		});
+		    destroyUrl: 'deleteRight.do',
+		    
+		   });
+		  
+		
+		
 	});
 	
 	
 	function queryRirhts() {
+		
 		$.post("queryAllRights.do",function(data) {
 			$("#rt-dg").edatagrid({data:data});
+			
 			$("#rt-dg").edatagrid({onLoadSuccess:function(){
 				$('#rt-query').panel('open');
 			}});
-			
-		})}
+		})};
 	
 	
 		function saveRight() {
@@ -128,6 +133,11 @@
 				<th field="pid" width="100" align="center" editor="{type:'numberbox',options:{precision:0}}">所属权限</th>
 			</tr>
 		</thead>
+		<tbody>
+			
+		
+		
+		</tbody>
 	</table>
 	</div>
 	</div>

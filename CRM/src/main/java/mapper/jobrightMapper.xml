@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cheney.dao.jobrightMapper" >
-  <resultMap id="BaseResultMap" type="com.cheney.entity.jobright" >
+<mapper namespace="com.cheney.dao.JobRightDao" >
+  <resultMap id="JobrightResultMap" type="JobRight" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="jobInfoId" property="jobInfoId" jdbcType="INTEGER" />
-    <result column="rightId" property="rightId" jdbcType="INTEGER" />
+		<collection property="rights" javaType="com.cheney.entity.Rights">
+  			<id column="rid" property="rid" jdbcType="INTEGER" />
+  			<result column="rightName" property="rightName" jdbcType="VARCHAR" />
+    		<result column="url" property="url" jdbcType="VARCHAR" />
+    		<result column="pid" property="pid" jdbcType="INTEGER" />
+  		</collection>
   </resultMap>
+  
+  <select id="selectByRid" resultMap="JobrightResultMap">
+  	SELECT J.id,R.rid,R.rightName,R.url,R.pid
+  	FROM jobright J
+  	LEFT JOIN rights R ON J.rightid = R.rid
+  	WHERE
+  	j.jobinfoid = #{id}
+
+  </select>
+  
+  
+  
 </mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cheney.dao.custominfoMapper" >
-  <resultMap id="BaseResultMap" type="com.cheney.entity.custominfo" >
+<mapper namespace="com.cheney.dao.CustominfoDao" >
+  <resultMap id="CustominfoResultMap" type="Custominfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="customId" property="customId" jdbcType="INTEGER" />
     <result column="followManId" property="followManId" jdbcType="INTEGER" />

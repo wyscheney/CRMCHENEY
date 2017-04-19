@@ -94,11 +94,11 @@
 	function login(){
 		
 		var pwd=$("#pass").val();
-			pwd=hex_sha1(pwd);
+			//pwd=hex_sha1(pwd);
 			
 			
 		$.post('login.do',{username:$('#username').val(),pass:pwd},function(data){
-			
+			//alert(data);
 			if(data=="1"){
 				window.location.href="main.jsp";
 			}else{

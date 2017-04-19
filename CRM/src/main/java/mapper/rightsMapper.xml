@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cheney.dao.rightsMapper" >
-  <resultMap id="BaseResultMap" type="com.cheney.entity.rights" >
+<mapper namespace="com.cheney.dao.RightsDao" >
+  <resultMap id="RightsResultMap" type="Rights" >
     <id column="rid" property="rid" jdbcType="INTEGER" />
     <result column="rightName" property="rightName" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
   </resultMap>
+  
+  
+  <select id="queryAllRightsBiz" resultMap="RightsResultMap">
+  	SELECT rid,rightName,url,pid
+  	FROM RIGHTS
+  </select>
 </mapper>

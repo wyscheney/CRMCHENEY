@@ -143,11 +143,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\tfunction login(){\r\n");
       out.write("\t\t\r\n");
       out.write("\t\tvar pwd=$(\"#pass\").val();\r\n");
-      out.write("\t\t\tpwd=hex_sha1(pwd);\r\n");
+      out.write("\t\t\t//pwd=hex_sha1(pwd);\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t\t$.post('login.do',{username:$('#username').val(),pass:pwd},function(data){\r\n");
-      out.write("\t\t\t\r\n");
+      out.write("\t\t\t//alert(data);\r\n");
       out.write("\t\t\tif(data==\"1\"){\r\n");
       out.write("\t\t\t\twindow.location.href=\"main.jsp\";\r\n");
       out.write("\t\t\t}else{\r\n");
