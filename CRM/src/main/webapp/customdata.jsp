@@ -226,7 +226,7 @@
 						$.messager.alert('OK', "客户添加成功!", 'info');
 						$('#cm-ff').form("resetValidation").form("reset");
 						$('#cm-dlg').dialog('close');
-						$('#cm-dg').datagrid('reload');
+						$('# cm-dg').datagrid('reload');
 					} else {
 						$.messager.alert('Sorry', '客户已存在!', 'error');
 					}
@@ -369,7 +369,7 @@
 		/* 分配已上门客户 */
 		function allotToConsult() {
 			var row = $('#cm-dg').datagrid('getSelected');
-
+			
 			if ($("#cosulterID").combobox('getValue') != '') {
 				$('#consult-ff').form('submit', {
 					url : 'allotToConsult.do',

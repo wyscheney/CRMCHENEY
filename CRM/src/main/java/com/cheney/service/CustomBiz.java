@@ -1,13 +1,10 @@
-package com.cheney.dao;
+package com.cheney.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.cheney.entity.Custom;
 
-@Repository
-public interface CustomDao {
+public interface CustomBiz {
 
 	public int insertCustom(Custom custom);
 	
@@ -15,5 +12,5 @@ public interface CustomDao {
 
 	public int updateCustom(Custom custom);
 	
-	
+
 }

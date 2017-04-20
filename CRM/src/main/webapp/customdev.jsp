@@ -87,7 +87,7 @@
 	
 	<script type="text/javascript">
 		$(function() {
-			
+			alert("123");
 			$('#cf-dg').edatagrid({
 
 				onSave : function(index, row) {

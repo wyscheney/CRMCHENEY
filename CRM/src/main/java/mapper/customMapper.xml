@@ -12,4 +12,93 @@
     <result column="createDate" property="createDate" jdbcType="DATE" />
     <result column="nviteName" property="nviteName" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <insert id="insertCustom" parameterType="com.cheney.entity.Custom" useGeneratedKeys="true">
+  		insert into custom(
+  			name,
+  			education,
+  			phoneNo,
+  			qq,
+  			email,
+  			customStatu,
+  			createDate,
+  			inviteName
+  		)
+  		VALUES(
+  		#{name},
+  		#{education},
+  		#{phoneNo},
+  		#{qq},
+  		#{email},
+  		#{customStatu},
+  		#{createDate},
+  		#{inviteName}
+  		)
+  </insert>
+  
+  <select id="queryCustom" parameterType="com.cheney.entity.Custom" resultMap="CustomResultMap">
+  		SELECT id,name,education,phoneNo,qq,email,customStatu,createDate,inviteName
+  		FROM custom
+  		<where>
+  			<if test="name !=null">
+  			name Like #{name}
+  			</if>
+  			<if test="customStatu!=null">
+  			customStatu = #{customStatu}
+  			</if>
+  			<if test="inviteName!=null">
+  			inviteName Like #{inviteName}
+  			</if>
+  			<if test="phoneNo!=null">
+  			phoneNo Like #{phoneNo}
+  			</if>
+  			<if test="createDate !=null">
+  			createDate=#{createDate}
+  			</if>
+  		</where>
+  </select>
+  
+  <update id="updateCustom" parameterType="com.cheney.entity.Custom">
+   update custom
+   <set>
+   <if test="name!=null || ''.equals(name)">
+   	name =#{name},
+   </if>
+   <if test="education!=null || ''.equals(education)">
+   	education=#{education},
+   </if>
+   <if test="phoneNo!=null || ''.equals(phoneNo)">
+    phoneNo=#{phoneNo},
+    </if>
+    <if test="qq !=null">
+  	qq=#{qq},
+  	</if>
+  	<if test="email!=null ||''.equals(email)">
+  	email=#{email},
+  	</if>
+  	<if test="customStatu!=null ||''.equals(customStatu)">
+  	customStatu=#{customStatu},
+  	</if>
+  	<if test="createDate!=null">
+  	createDate=#{createDate},
+  	</if>
+  	<if test="inviteName!=null || ''.equals(inviteName)">
+  	inviteName=#{inviteName}
+  	</if>
+   </set>
+   <where>
+   id=#{id}
+   </where>
+  
+  
+  
+  
+  </update>
+  
+  
+  
+  
+  
+  
+  
 </mapper>

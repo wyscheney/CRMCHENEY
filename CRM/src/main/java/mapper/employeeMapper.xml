@@ -12,6 +12,17 @@
     <result column="phoneNo" property="phoneNo" jdbcType="VARCHAR" />
     <result column="officeTel" property="officeTel" jdbcType="VARCHAR" />
     <result column="workStatu" property="workStatu" jdbcType="VARCHAR" />
+    <association property="department" javaType="com.cheney.entity.Department">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="dname" property="dname" jdbcType="CHAR" />
+    </association>
+    <association property="jobInfo" jdbcType="com.cheney.entity.Jobinfo">
+    	 <id column="id" property="id" jdbcType="INTEGER" />
+    	 <result column="job" property="job" jdbcType="CHAR" />
+    	 <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+    </association>
+    
+    
   </resultMap>
   <select id="selectByNameAndPass" resultMap="EmployeeResultMap">
   	SELECT * FROM employee
@@ -20,9 +31,18 @@
   	AND
   	pass = #{pass}
   </select>
+  <select id="queryByJobInfo" resultMap="EmployeeResultMap">
+ 	SELECT * FROM employee
+ 	WHERE
+ 	jobinfoid = #{jobInfoId}
+  </select>
   
-  
-  
+  <select id="selectAllEmployee" resultMap="EmployeeResultMap">
+  	SELECT E.id,E.nickname,E.realname,E.phoneNo,E.officeTel,D.dname,J.job 
+  	FROM employee E
+  	LEFT JOIN department D ON E.departmentId = D.id
+  	LEFT JOIN jobInfo J ON E.jobInfoId = J.id
+  </select>
   
   
   

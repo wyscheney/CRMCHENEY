@@ -1,0 +1,14 @@
+package com.cheney.service;
+
+import java.util.List;
+
+import com.cheney.entity.JobRight;
+import com.cheney.entity.Rights;
+
+public interface JobRightBiz {
+	
+	
+	public List<Rights> queryJobRight(Integer jobinfoId);
+	
+	
+}
