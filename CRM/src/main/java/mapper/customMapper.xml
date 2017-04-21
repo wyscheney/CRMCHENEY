@@ -14,6 +14,9 @@
   </resultMap>
   
   <insert id="insertCustom" parameterType="com.cheney.entity.Custom" useGeneratedKeys="true">
+  		<selectKey resultType="int" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID() AS id
+    	</selectKey>
   		insert into custom(
   			name,
   			education,
@@ -89,14 +92,28 @@
    <where>
    id=#{id}
    </where>
-  
-  
-  
-  
   </update>
   
+  <select id="selectIdsByStatus" resultType="Integer">
+  	SELECT id from custom
+	where
+  	customStatu = #{customStatu}
+  </select>
   
   
+  <update id="updateTOSalse">
+  	UPDATE custom
+  	<set>
+  		customStatu = '2'
+  	</set>
+  	<where>
+  	id in 
+  	<foreach collection="array" item="id" open="(" separator="," close=")" >    
+            #{id}    
+    </foreach>
+  	</where>
+  
+  </update>
   
   
   

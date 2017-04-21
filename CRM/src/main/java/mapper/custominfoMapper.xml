@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cheney.dao.CustominfoDao" >
-  <resultMap id="CustominfoResultMap" type="Custominfo" >
+  <resultMap id="CustominfoResultMap" type="com.cheney.entity.Custominfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="customId" property="customId" jdbcType="INTEGER" />
     <result column="followManId" property="followManId" jdbcType="INTEGER" />
@@ -11,4 +11,97 @@
     <result column="planDate" property="planDate" jdbcType="DATE" />
     <result column="mark" property="mark" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <resultMap type="java.util.LinkedHashMap" id="salseResult">
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customId" property="customId" jdbcType="INTEGER" />
+    <result column="followManId" property="followManId" jdbcType="INTEGER" />
+    <result column="statu" property="statu" jdbcType="VARCHAR" />
+    <result column="startDate" property="startDate" jdbcType="DATE" />
+    <result column="lastFollowDate" property="lastFollowDate" jdbcType="DATE" />
+    <result column="planDate" property="planDate" jdbcType="DATE" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+    <result column="name" property="customName" jdbcType="INTEGER" />
+    <result column="phoneNo" property="customPhoneNo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="addcustominfos" parameterType="Custominfo">
+  	insert into CustomInfo(
+  		customId,
+  		followManId,
+  		statu,
+  		startDate
+  	)
+  	VALUES
+  	<foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.customId},
+        #{item.followManId},
+        #{item.statu},
+        #{item.startDate}) 
+    </foreach>
+   </insert>
+  <select id="selectCustom" resultMap="salseResult">
+  Select I.id,C.name,C.phoneNo,I.statu,I.startDate,I.lastFollowDate,I.planDate,I.mark
+  FROM CustomInfo I
+  LEFT JOIN Custom C ON I.customId = C.id
+  <where>
+  followManId = #{followManId}
+  <if test="src==0">
+  AND startDate = CURDATE()
+  </if>
+  <if test="src==1">
+  AND startDate &lt; CURDATE()
+  </if>
+  <if test="src==2">
+  AND planDate=CURDATE()
+  </if>
+  <if test="src==3">
+   AND DATE_FORMAT(startDate,'%Y%m' ) = DATE_FORMAT(CURDATE( ),'%Y%m' )
+   </if>
+  </where>
+  </select>
+  
+  
+  <update id="updateCustomInfo" parameterType="Custominfo">
+  	UPDATE CustomInfo
+  	<set>
+  	<if test="statu!=null || ''.equals(statu)">
+  		statu=#{statu},
+  	</if>
+  	<if test="lastFollowDate!=null">
+  	lastFollowDate= #{lastFollowDate,jdbcType=DATE},
+  	</if>
+  	<if test="planDate!=null">
+  	planDate= #{planDate,jdbcType=DATE},
+  	</if>
+  	<if test="mark!=null">
+  	mark =concat_ws(',',mark,#{mark})
+  	</if>
+  	</set>
+  	<where>
+  		id = #{id}
+  	</where>
+  
+  </update>
+  
+  <insert id="insertCustominfo" parameterType="Custominfo">
+  insert into CustomInfo(
+  		customId,
+  		followManId,
+  		statu,
+  		startDate
+  	)
+  	VALUES(
+  		#{customId},
+        #{followManId},
+        #{statu},
+        #{startDate}
+  	)
+  </insert>
+  
+  
+  
+  
+  
 </mapper>

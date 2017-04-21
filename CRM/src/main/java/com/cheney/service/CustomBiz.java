@@ -11,6 +11,8 @@ public interface CustomBiz {
 	public List<Custom> queryCustom(Custom custom);
 
 	public int updateCustom(Custom custom);
+
+	public int allotCustom();
 	
 
 }

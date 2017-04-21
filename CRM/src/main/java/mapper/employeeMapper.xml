@@ -16,10 +16,10 @@
     	<id column="id" property="id" jdbcType="INTEGER" />
     	<result column="dname" property="dname" jdbcType="CHAR" />
     </association>
-    <association property="jobInfo" jdbcType="com.cheney.entity.Jobinfo">
-    	 <id column="id" property="id" jdbcType="INTEGER" />
-    	 <result column="job" property="job" jdbcType="CHAR" />
-    	 <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+    <association property="jobInfo" javaType="com.cheney.entity.Jobinfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="job" property="job" jdbcType="CHAR" />
+	    <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
     </association>
     
     
@@ -44,7 +44,13 @@
   	LEFT JOIN jobInfo J ON E.jobInfoId = J.id
   </select>
   
-  
+  <select id="selectEmployBydepaartmentId" resultMap="EmployeeResultMap">
+  	select * From employee
+  	<if test="departmentId!=null">
+  	where departmentId = #{departmentId}
+  	AND jobInfoId = #{jobInfoId}
+  	</if>
+  </select>
   
   
 </mapper>

@@ -15,5 +15,7 @@ public interface CustomDao {
 
 	public int updateCustom(Custom custom);
 	
-	
+	public Integer[] selectIdsByStatus(String CustomStatus);
+
+	public int updateTOSalse(Integer[] ids);
 }

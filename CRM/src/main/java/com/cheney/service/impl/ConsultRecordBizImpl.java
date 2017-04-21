@@ -1,9 +1,14 @@
 package com.cheney.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.cheney.constant.ConsultStatu;
@@ -37,6 +42,31 @@ public class ConsultRecordBizImpl implements ConsultRecordBiz {
 			count= consultRecordDao.addConsultRecord(consultRecord);
 		}
 		return count;
+	}
+
+
+	public List<ConsultRecord> queryRecord(Integer consultManId,String customName, String phoneNo, Date consultDate, Date endDate) {
+		
+		return consultRecordDao.queryRecord(consultManId,customName, phoneNo, consultDate, endDate);
+	}
+	
+	
+	public List<Map<String, Object>> queryRecordMap(Integer consultManId,String customName, String phoneNo, Date consultDate, Date endDate){
+		
+		
+		return consultRecordDao.queryRecordMap(consultManId, customName, phoneNo, consultDate, endDate);
+	}
+
+
+	public int updateRecord(ConsultRecord consultRecord) {
+		
+		return consultRecordDao.updateRecord(consultRecord);
+	}
+
+
+	public int addResult(Integer id, String result) {
+		
+		return consultRecordDao.addResult(id,result);
 	}
 
 }

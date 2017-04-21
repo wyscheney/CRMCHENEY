@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -87,12 +88,10 @@
 	
 	<script type="text/javascript">
 		$(function() {
-			alert("123");
 			$('#cf-dg').edatagrid({
 
 				onSave : function(index, row) {
-
-
+				
 					if (row.planDate == '' | row.planDate == null) {
 						$.post('updateCustomInfo.do', {
 							id : row.id,

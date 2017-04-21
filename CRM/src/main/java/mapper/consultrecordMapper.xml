@@ -9,7 +9,31 @@
     <result column="consultStatu" property="consultStatu" jdbcType="VARCHAR" />
     <result column="consultDate" property="consultDate" jdbcType="DATE" />
     <result column="result" property="result" jdbcType="VARCHAR" />
-  </resultMap>
+    <association property="custom" javaType="com.cheney.entity.Custom">
+    	<id column="cid" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="education" property="education" jdbcType="VARCHAR" />
+	    <result column="phoneNo" property="phoneNo" jdbcType="VARCHAR" />
+	    <result column="qq" property="qq" jdbcType="INTEGER" />
+	    <result column="email" property="email" jdbcType="VARCHAR" />
+	    <result column="customStatu" property="customStatu" jdbcType="VARCHAR" />
+	    <result column="createDate" property="createDate" jdbcType="DATE" />
+	    <result column="nviteName" property="nviteName" jdbcType="VARCHAR" />
+    </association>
+    </resultMap>
+    
+    <resultMap id="ConsultRecordResultMap" type="java.util.LinkedHashMap" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customId" property="customId" jdbcType="INTEGER" />
+    <result column="consultStatu" property="consultStatu" jdbcType="VARCHAR" />
+    <result column="consultDate" property="consultDate" jdbcType="DATE" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="name" property="customName" jdbcType="INTEGER" />
+    <result column="phoneNo" property="customPhoneNo" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    
+    
  
  
  <insert id="addConsultRecord" parameterType="com.cheney.entity.ConsultRecord">
@@ -31,6 +55,59 @@
   	select * FROM consultrecord
   	where customId=#{customId}
   </select>
+
+  <select id="queryRecord" resultMap="ConsultRecordResult">
+  	SELECT R.id,R.customId,C.id as cId,C.name,C.phoneNo,R.consultDate,R.consultStatu,R.result
+  	FROM consultrecord R
+  	LEFT JOIN custom C ON R.customId = C.id
+  	<where>
+  	<if test="consultManId!=null || consultManId!=0">
+  	consultManId=#{consultManId}
+  	</if>
+  	<if test="customName!=null || ''.equals(customName)">
+  	AND C.name Like #{customName}
+  	</if>
+  	<if test="phoneNo!=null || ''.equals(phoneNo) ">
+  	AND C.phoneNo LIKE #{phoneNo}
+  	</if>
+  	<if test="consultDate!=null">
+  	AND	R.consultDate BETWEEN #{consultDate,jdbcType=DATE} AND #{endDate,jdbcType=DATE}
+  	</if>
+  	
+	</where>
+  	</select>
+  	
+  	<select id="queryRecordMap" resultMap="ConsultRecordResultMap">
+  	SELECT R.id,R.customId,C.name,C.phoneNo,R.consultDate,R.consultStatu,R.result
+  	FROM consultrecord R
+  	LEFT JOIN custom C ON R.customId = C.id
+  	<where>
+  	<if test="consultManId!=null || consultManId!=0">
+  	consultManId=#{consultManId}
+  	</if>
+  	<if test="customName!=null || ''.equals(customName)">
+  	AND C.name Like #{customName}
+  	</if>
+  	<if test="phoneNo!=null || ''.equals(phoneNo) ">
+  	AND C.phoneNo LIKE #{phoneNo}
+  	</if>
+  	<if test="consultDate!=null">
+  	AND	R.consultDate BETWEEN #{consultDate,jdbcType=DATE} AND #{endDate,jdbcType=DATE}
+  	</if>
+  	
+	</where>
+  	</select>
+  	
+  	
+  	<update id="addResult">
+  		UPDATE  consultrecord
+  		<set>
+  			result =concat_ws(',',result,#{result})
+  		</set>
+  		<where>
+  		id=#{id}
+  		</where>
+  	</update>
 
 
 

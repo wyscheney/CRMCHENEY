@@ -15,11 +15,19 @@ public class ConsultRecord {
 
     private String result;
 
+    private Custom custom;
     
     
     
-    
-    public ConsultRecord(Integer customId, Integer consultManId, String consultStatu, Date consultDate) {
+    public Custom getCustom() {
+		return custom;
+	}
+
+	public void setCustom(Custom custom) {
+		this.custom = custom;
+	}
+
+	public ConsultRecord(Integer customId, Integer consultManId, String consultStatu, Date consultDate) {
 		super();
 		this.customId = customId;
 		this.consultManId = consultManId;

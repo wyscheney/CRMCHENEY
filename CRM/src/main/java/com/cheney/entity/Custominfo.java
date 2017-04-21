@@ -2,6 +2,8 @@ package com.cheney.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Custominfo {
     private Integer id;
 
@@ -10,16 +12,33 @@ public class Custominfo {
     private Integer followManId;
 
     private String statu;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastFollowDate;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date planDate;
 
     private String mark;
+    
+    
+    
+    
+    
+    public Custominfo(Integer customId, Integer followManId, String statu, Date startDate) {
+		super();
+		this.customId = customId;
+		this.followManId = followManId;
+		this.statu = statu;
+		this.startDate = startDate;
+	}
 
-    public Integer getId() {
+	public Custominfo() {
+		super();
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -82,4 +101,12 @@ public class Custominfo {
     public void setMark(String mark) {
         this.mark = mark;
     }
+
+	@Override
+	public String toString() {
+		return "Custominfo [id=" + id + ", customId=" + customId + ", followManId=" + followManId + ", statu=" + statu
+				+ ", startDate=" + startDate + ", lastFollowDate=" + lastFollowDate + ", planDate=" + planDate
+				+ ", mark=" + mark + "]";
+	}
+    
 }
