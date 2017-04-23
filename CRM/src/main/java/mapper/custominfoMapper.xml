@@ -25,6 +25,12 @@
     <result column="name" property="customName" jdbcType="INTEGER" />
     <result column="phoneNo" property="customPhoneNo" jdbcType="VARCHAR" />
   </resultMap>
+ 
+
+ 
+ 
+ 
+ 
   
   <insert id="addcustominfos" parameterType="Custominfo">
   	insert into CustomInfo(
@@ -100,7 +106,22 @@
   	)
   </insert>
   
-  
+  <select id="selectCountByStatu" resultType="Integer">
+  	select count(*) FROM custominfo
+  	<where>
+  	<if test="statu !=null">
+  	statu=#{statu}
+  </if>
+  	<if test="followManId != null and followManId.length!=0">
+  	
+  	AND followManId in
+	<foreach collection="followManId" item="followManId" open="("
+    separator="," close=")">
+		#{followManId}
+ 	</foreach>
+  	</if>
+  	</where>
+  </select>
   
   
   

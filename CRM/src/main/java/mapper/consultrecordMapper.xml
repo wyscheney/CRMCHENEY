@@ -108,7 +108,29 @@
   		id=#{id}
   		</where>
   	</update>
-
+	
+	
+	<select id="queryByStu" resultType="Integer">
+	SELECT count(1) FROM consultrecord
+	<where>
+		<if test="statu !=null || ''.equals(statu) ">
+		consultStatu =#{statu}
+		</if>
+		<if test=" consultManId!=null and consultManId.length!=0">
+		AND consultManId in
+		<foreach collection="consultManId" item="followManId" open="("
+    	separator="," close=")">
+		#{consultManId}
+ 		</foreach>
+		</if>
+	
+	</where>
+	
+	
+	
+	
+	</select>
+	
 
 
 </mapper>

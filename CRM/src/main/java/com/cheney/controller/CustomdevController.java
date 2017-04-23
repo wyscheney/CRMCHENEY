@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cheney.entity.Custominfo;
+import com.cheney.entity.Employee;
 import com.cheney.service.CustomInfoBiz;
+import com.cheney.service.UserBiz;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,6 +24,8 @@ public class CustomdevController {
 	
 	@Resource
 	private CustomInfoBiz customInfoBiz;
+	@Resource
+	private UserBiz userBiz;
 	
 	@RequestMapping(value="customInfo",produces = "application/json; charset=utf-8")
 	public @ResponseBody String customInfo(Integer followManId,Integer src){
@@ -61,8 +65,20 @@ public class CustomdevController {
 		int count = customInfoBiz.updateCustomInfo(coustominfo);
 		return count+"";
 	}
-	
-	
+	@RequestMapping(value="empForJobId",produces = "application/json; charset=utf-8")
+	public @ResponseBody String empForJobId(Integer jobInfoId){
+		
+		List<Employee> employee = userBiz.queryByJobInfo(jobInfoId);
+		ObjectMapper mapper =new ObjectMapper();
+		String json="";
+		try {
+			json=mapper.writeValueAsString(employee);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	}
 	
 	
 }

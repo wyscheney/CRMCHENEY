@@ -40,4 +40,11 @@ public interface ConsultRecordBiz {
 	 * @return
 	 */
 	public int addResult(Integer id, String result);
+	
+	/**
+	 * 根据id获取每个人的统计数据.
+	 * @param consultManId
+	 * @return
+	 */
+	public Map<String, Object> selectCountByConsultManId(Integer consultManId[],Integer departmentId);
 }

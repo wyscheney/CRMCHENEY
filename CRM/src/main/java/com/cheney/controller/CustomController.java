@@ -46,9 +46,9 @@ public class CustomController {
 	public @ResponseBody String insertCustom(Custom custom,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Employee user = (Employee) session.getAttribute("user");
-		custom.setInviteName(user.getRealname());
+		custom.setInviteName(user.getRealname()); 
 		custom.setCreateDate(new Date());
-		
+		 
 		int count = customBiz.insertCustom(custom);
 		System.out.println(user.getJobInfo());
 		if(user.getJobInfoId()==5){
@@ -61,9 +61,17 @@ public class CustomController {
 	
 	//查询所有客户信息
 	@RequestMapping(value="queryCustom",produces = "application/json; charset=utf-8")
-	public @ResponseBody String queryCustom(Custom custom){
+	public @ResponseBody String queryCustom(Custom custom,Integer page,Integer rows){
 		
 		List<Custom> list = customBiz.queryCustom(custom);
+		int fromIndex = (page-1)*rows;
+		int toIndex =page*rows;
+		if(toIndex>list.size()){
+			toIndex=list.size();
+		}
+		
+		List<Custom> subList = list.subList(fromIndex, toIndex);
+		
 		
 		ObjectMapper mapper =new ObjectMapper();
 		
@@ -73,7 +81,7 @@ public class CustomController {
 		String customResult ="";
 		
 		try {
-			customResult=mapper.writeValueAsString(list);
+			customResult=mapper.writeValueAsString(subList);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

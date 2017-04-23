@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cheney.dao.ResetpassDao" >
-  <resultMap id="ResetpassResultMap" type="Resetpass" >
+  <resultMap id="ResetpassResultMap" type="com.cheney.entity.Resetpass" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="phoneNo" property="phoneNo" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="queryAllResetPass" resultMap="ResetpassResultMap">
+  	select * from resetpass
+  </select>
+ <delete id="delete">
+ 	DELETE FROM resetpass
+ 	WHERE id=#{id}
+ </delete>
+
 </mapper>

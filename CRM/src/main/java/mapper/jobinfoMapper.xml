@@ -6,4 +6,17 @@
     <result column="job" property="job" jdbcType="CHAR" />
     <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
   </resultMap>
+  <select id="queryAllJobinfo" resultMap="JobinfoResultMap">
+  	SELECT * FROM jobInfo
+  	<where>
+  	<if test="departmentId!=null">
+  		departmentId=#{departmentId}
+  	</if>
+  	
+  	</where>
+  
+  
+  </select>
+  
+  
 </mapper>

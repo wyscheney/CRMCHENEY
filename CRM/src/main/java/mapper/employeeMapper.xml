@@ -24,12 +24,35 @@
     
     
   </resultMap>
-  <select id="selectByNameAndPass" resultMap="EmployeeResultMap">
+  
+  <resultMap type="java.util.Map" id="employeeInfoMap">
+ <!--  E.id,E.nickname,E.realname,E.phoneNo,E.officeTel,D.dname,J.job  -->
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="phoneNo" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="officeTel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="dname" property="dname" jdbcType="CHAR" />
+    <result column="job" property="job" jdbcType="CHAR" />
+  </resultMap>
+  
+  
+  <select id="selectEmployee" resultMap="EmployeeResultMap">
   	SELECT * FROM employee
-  	WHERE
-  	username = #{username}
-  	AND
-  	pass = #{pass}
+  	<where>
+  		<if test="username !=null">
+  		username = #{username}
+  		</if>
+  		<if test="pass !=null">
+  		AND pass = #{pass}
+  		</if>
+  		<if test="workStatu !=null">
+  		AND workStatu =#{workStatu}
+  		</if>
+  	</where>
+  	
+  	
+  	
   </select>
   <select id="queryByJobInfo" resultMap="EmployeeResultMap">
  	SELECT * FROM employee
@@ -51,6 +74,87 @@
   	AND jobInfoId = #{jobInfoId}
   	</if>
   </select>
+  
+  <select id="queryByDeptId" resultMap="EmployeeResultMap">
+  	SELECT * from employee
+  	<where>
+  	<if test="deptId !=0">
+  	departmentId = #{deptId}
+  	</if>
+  	<if test="managerId !=0">
+  	AND id != #{managerId}
+  	</if>
+  	</where>
+  </select>
+  <select id="queryById" resultMap="EmployeeResultMap">
+  	SELECT * FROM employee
+  	<where>
+  	id = #{id}
+  	</where>
+  
+  
+  </select>
+  <select id="queryIdsByDeptId" resultType="Integer">
+  	SELECT id FROM employee
+  	<where>
+  	<if test="deptId!= 0 || deptId!=null">
+  	departmentId=#{deptId}
+  	</if>
+  	</where>
+  </select>
+  
+  
+  <insert id="addUser" parameterType="com.cheney.entity.Employee">
+  	INSERT INTO employee(
+  	username,
+  	pass,
+  	nickname,
+  	realname,
+  	jobInfoId,
+  	departmentId,
+  	phoneNo,
+  	officeTel,
+  	workStatu
+  	)
+  	VALUES(
+  	#{username},
+  	#{pass},
+  	#{nickname},
+  	#{realname},
+  	#{jobInfoId},
+  	#{departmentId},
+  	#{phoneNo},
+  	#{officeTel},
+  	#{workStatu}
+  	)
+  </insert>
+  
+  <update id="updateUser" parameterType="com.cheney.entity.Employee">
+  	UPDATE EMPLOYEE
+  	<set>
+  	<if test="pass!=null">
+  	pass = #{pass},
+  	</if>
+  	<if test="workStatu!=null">
+  	workStatu=#{workStatu}
+  	</if>
+  	</set>
+  	<where>
+  	id=#{id}
+  	
+  	</where>
+  </update>
+  
+  <select id="queryAllEmployee" resultMap="employeeInfoMap">
+  	SELECT E.id,E.nickname,E.realname,E.phoneNo,E.officeTel,D.dname,J.job 
+  	FROM employee E
+  	LEFT JOIN department D ON E.departmentId = D.id
+  	LEFT JOIN jobInfo J ON E.jobInfoId = J.id
+  </select>
+  
+  
+  
+  
   
   
 </mapper>
