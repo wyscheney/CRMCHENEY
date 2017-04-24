@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import com.cheney.dao.EmployeeDao;
@@ -29,7 +30,9 @@ public class ResetPassBizImpl implements ResetPassBiz {
 	public int resetPass(Resetpass resetpass) {
 		Employee employee = employeeDao.selectEmployee(resetpass.getUsername(), null, null);
 		int count =0;
-		employee.setPass("123456");
+		String pass = DigestUtils.sha1Hex("123456");
+
+		employee.setPass(pass);
 		count = employeeDao.updateUser(employee);
 		
 		count=resetpassDao.delete(resetpass.getId());

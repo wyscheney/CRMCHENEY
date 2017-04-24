@@ -39,8 +39,19 @@ public interface UserBiz {
 	 * @return
 	 */
 	public int cancleUser(String username);
-
+	/**
+	 * 
+	 * 查找用户信息,包括名字,联系方式,部门,职位.
+	 * @return
+	 */
 	public List<Map<String, Object>> queryAllEmployee();
+	/**
+	 * 根据用户名字和密码查询是否发起重置.
+	 * @param username
+	 * @param phoneNo
+	 * @return
+	 */
+	public int reqResetPass(String username, String phoneNo);
 	
 	
 	

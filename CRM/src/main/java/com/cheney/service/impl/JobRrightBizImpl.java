@@ -27,4 +27,20 @@ public class JobRrightBizImpl implements JobRightBiz {
 		return list;
 	}
 
+	public int allotjobRights(JobRight jobRight) {
+		// 查询,是否已经有这个对照了,如果有返回2
+		//如果没有添加. 返回1.
+		//失败返回0;
+		int count = 0;
+		JobRight jr =jobRightDao.query(jobRight);
+		
+		if(jr==null){
+			count =jobRightDao.insert(jobRight);
+		}else{
+			count= 2;
+		}
+		
+		return count;
+	}
+
 }

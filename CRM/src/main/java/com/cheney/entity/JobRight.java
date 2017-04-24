@@ -4,9 +4,14 @@ public class JobRight {
     private Integer id;
 
     private Jobinfo jobinfo;
-
+    
+    private Integer jobinfoId;
+    
+    
     private Rights rights;
 
+    private Integer rightId;
+    
     public Integer getId() {
         return id;
     }
@@ -30,6 +35,26 @@ public class JobRight {
 	public void setRights(Rights rights) {
 		this.rights = rights;
 	}
+
+	public Integer getRightId() {
+		return rightId;
+	}
+
+	public void setRightId(Integer rightId) {
+		this.rightId = rightId;
+	}
+
+	public Integer getJobinfoId() {
+		return jobinfoId;
+	}
+
+	public void setJobinfoId(Integer jobinfoId) {
+		this.jobinfoId = jobinfoId;
+	}
+
+
+
+	
 
     
 }

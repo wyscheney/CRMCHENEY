@@ -143,7 +143,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\tfunction login(){\r\n");
       out.write("\t\t\r\n");
       out.write("\t\tvar pwd=$(\"#pass\").val();\r\n");
-      out.write("\t\t\t//pwd=hex_sha1(pwd);\r\n");
+      out.write("\t\t\tpwd=hex_sha1(pwd);\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t\t\t\r\n");
       out.write("\t\t$.post('login.do',{username:$('#username').val(),pass:pwd},function(data){\r\n");
@@ -177,6 +177,15 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t$('#forgot-dlg').dialog('close')\r\n");
       out.write("\t\t\t\t\t$.messager.alert('OK', '重置密码请求已发出,请等待管理员处理!', 'info');\r\n");
       out.write("\r\n");
+      out.write("\t\t\t\t}else if(data == 2){\r\n");
+      out.write("\t\t\t\t\t//表单重置\r\n");
+      out.write("\t\t\t\t\t$('#forgot-ff').form('reset');\r\n");
+      out.write("\t\t\t\t\t//关闭对话框\r\n");
+      out.write("\t\t\t\t\t$('#forgot-dlg').dialog('close')\r\n");
+      out.write("\t\t\t\t\t$.messager.alert('OK', '您已经发送过请求了,请不要重新发送!', 'info');\r\n");
+      out.write("\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t}else{\r\n");
+      out.write("\t\t\t\t\t$.messager.alert('OK', '用户名或手机号不正确!', 'info');\r\n");
       out.write("\t\t\t\t}\r\n");
       out.write("\t\t\t}\r\n");
       out.write("\t\t});\r\n");

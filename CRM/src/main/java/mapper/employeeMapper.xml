@@ -152,7 +152,13 @@
   	LEFT JOIN jobInfo J ON E.jobInfoId = J.id
   </select>
   
-  
+  <select id="queryEmployee" resultMap="EmployeeResultMap">
+  SELECT username FROM employee
+  <where>
+  username=#{username}
+  AND phoneNo = #{phoneNo}
+  </where>
+  </select>
   
   
   

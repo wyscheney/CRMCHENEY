@@ -94,7 +94,7 @@
 	function login(){
 		
 		var pwd=$("#pass").val();
-			//pwd=hex_sha1(pwd);
+			pwd=hex_sha1(pwd);
 			
 			
 		$.post('login.do',{username:$('#username').val(),pass:pwd},function(data){
@@ -128,6 +128,15 @@
 					$('#forgot-dlg').dialog('close')
 					$.messager.alert('OK', '重置密码请求已发出,请等待管理员处理!', 'info');
 
+				}else if(data == 2){
+					//表单重置
+					$('#forgot-ff').form('reset');
+					//关闭对话框
+					$('#forgot-dlg').dialog('close')
+					$.messager.alert('OK', '您已经发送过请求了,请不要重新发送!', 'info');
+					
+				}else{
+					$.messager.alert('OK', '用户名或手机号不正确!', 'info');
 				}
 			}
 		});

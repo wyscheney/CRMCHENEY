@@ -5,16 +5,22 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import com.cheney.dao.EmployeeDao;
+import com.cheney.dao.ResetpassDao;
 import com.cheney.entity.Employee;
+import com.cheney.entity.Resetpass;
 import com.cheney.service.UserBiz;
 
 @Service
 public class UserBizImpl implements UserBiz{
 	@Resource
 	private EmployeeDao employeeDao;
+	@Resource
+	private ResetpassDao resetpassDao;
+	
 	
 	public Employee login(String username, String pass) {
 		
@@ -52,8 +58,9 @@ public class UserBizImpl implements UserBiz{
 	public int addUser(Employee employee) {
 		
 		employee.setWorkStatu("1");
-		employee.setPass("123456");
+		String pass = DigestUtils.sha1Hex("123456");
 		
+		employee.setPass(pass);
 		return employeeDao.addUser(employee);
 	}
 
@@ -66,6 +73,20 @@ public class UserBizImpl implements UserBiz{
 	public List<Map<String, Object>> queryAllEmployee() {
 		
 		return employeeDao.queryAllEmployee();
+	}
+
+	public int reqResetPass(String username, String phoneNo) {
+		int count=0;
+		Resetpass resetpass = resetpassDao.queryResetPass(username);
+		if(resetpass==null){
+			Employee employee = employeeDao.queryEmployee(username,phoneNo);
+			if(employee!=null){
+				count=resetpassDao.insert(username,phoneNo);
+			}
+		}else{
+			count = 2;
+		}
+		return count;
 	}
 
 }

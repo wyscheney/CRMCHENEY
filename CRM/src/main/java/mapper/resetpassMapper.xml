@@ -13,5 +13,21 @@
  	DELETE FROM resetpass
  	WHERE id=#{id}
  </delete>
+  
+ <insert id="insert">
+  INSERT INTO resetpass(
+  username,
+  phoneNo
+  )
+  VALUES(
+  #{username},
+  #{phoneNo}
+  )
+ </insert>
+ <select id="queryResetPass" resultMap="ResetpassResultMap">
+ SELECT * FROM resetpass
+ WHERE 
+ username =#{username}
+</select>
 
 </mapper>

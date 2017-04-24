@@ -16,10 +16,20 @@ public class JobinfoBizImpl implements JobinfoBiz {
 	private JobinfoDao jobinfoDao;
 	
 	public List<Jobinfo> queryAllJobinfo(Integer deptmentid) {
-		
-		
-		
 		return jobinfoDao.queryAllJobinfo(deptmentid);
+	}
+
+	public int insert(Jobinfo jobinfo) {
+		int count =0;
+		
+		Jobinfo job =jobinfoDao.queryjobinfo(jobinfo.getJob());
+		if(job==null){
+			count =	jobinfoDao.insert(jobinfo)>0?1:0;
+		
+		}else{
+			count=2;
+		}
+		return count;
 	}
 
 }

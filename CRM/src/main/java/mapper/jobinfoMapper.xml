@@ -15,8 +15,21 @@
   	
   	</where>
   
-  
+  </select>
+  <select id="queryjobinfo" resultMap="JobinfoResultMap">
+  select * FROM jobInfo
+  WHERE
+  job =#{job}
   </select>
   
-  
+  <insert id="insert" parameterType="com.cheney.entity.Jobinfo">
+  INSERT INTO jobInfo(
+  job,
+  departmentId
+  )
+  VALUES(
+  #{job},
+  #{departmentId}
+  )
+  </insert>
 </mapper>

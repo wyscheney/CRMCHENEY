@@ -36,7 +36,6 @@
 		<span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton"
 			data-options="iconCls:'icon-reload'" style="height: 32px" onclick="showResetPass()">&nbsp;重置账号密码&nbsp;</a></span>
 			</c:if>
-			
 	</div>
 	<div id="admin-dlg" class="easyui-dialog" style="width:400px" closed="true"
 		buttons="#admin-dlg-buttons" closable="false">
@@ -264,6 +263,10 @@
 			});
 
 		}
+		
+		
+		
+		
 
 		function actionFormat(value, row) {
 			if (row.id != '')

@@ -60,7 +60,10 @@
 							}
 						}
 					});
-
+				
+						
+				
+			
 		}
 
 		function format(value,row){
@@ -115,6 +118,8 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#rt-dg').edatagrid('saveRow')">保存修改</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#rt-dg').edatagrid('cancelRow')">退出编辑</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#rt-dg').edatagrid('destroyRow')">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-large-clipart" plain="true"
+					onclick="openAllotDlg()">绑定权限</a>
     </div>
 	<table id="rt-dg" style="width:600px;height:600px;" 
 			title="查询结果"
@@ -141,9 +146,76 @@
 	</table>
 	</div>
 	</div>
+<div id="jobInfo-dlg" class="easyui-dialog" style="width:400px;padding-left: 10px"
+		buttons="#jobInfo-dlg-buttons" closed="true" closable="true" modal="false" title='请选择职位'>
+		<form id="jobInfo-ff" method="post">
+			<div>
+				<p>
+					<label for="jobinfoId" class="label-top">请选择职位:</label> <input id="jobinfoId"
+						name="jobinfoId" style="height: 32px;width: 100px" />
+				</p>
+			</div>
+		</form>
+		<div id="jobInfo-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"
+				onclick="allotJobinfo()" style="width:90px">确认分配</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" iconCls="icon-cancel"
+				onclick="javascript:$('#jobInfo-dlg').dialog('close')" style="width:90px">取消</a>
+		</div>
+	</div>
 
 
+<script type="text/javascript">
 
+		/* 打开分配职位对话框 */
+		function openAllotDlg() {
+			var row = $('#rt-dg').datagrid('getSelected');
+			if (row == null) {
+				$.messager.alert('Sorry', '请选择客户!', 'warning');
+			} else {
+				$('#jobinfoId').combobox({
+					url : 'queryAllJobs.do',
+					valueField : 'id',
+					textField : 'job',
+					panelHeight : 'auto',
+					editable : false,
+
+				})
+
+				$('#jobInfo-dlg').dialog('open');
+			}
+		}
+
+		/* 分配职位 */
+		function allotJobinfo() {
+			var row = $('#rt-dg').datagrid('getSelected');
+			alert(row.rid);
+			if ($("#jobinfoId").combobox('getValue') != '') {
+				$('#jobInfo-ff').form('submit', {
+					url : 'allotjobRights.do',
+					onSubmit : function(param) {
+						param.rightId  = row.rid;
+					},
+					success : function(data) {
+						if (data == 1) {
+							$('#jobInfo-dlg').dialog('close')
+							$.messager.alert('OK', "职位分配成功!", 'info');
+							$('#rt-dg').datagrid('reload');
+						} else if(data==2){
+							$('#jobInfo-dlg').dialog('close')
+							$.messager.alert('OK', "该职位已经有这个权限了!", 'info');
+							$('#rt-dg').datagrid('reload');
+						}else{
+							$.messager.alert('Sorry', '权限分配失败!', 'error');
+						}
+					}
+				});
+			} else {
+				$.messager.alert('Sorry', '请选择职位!', 'warnning');
+			}
+		}
+	
+	</script>
 
 </body>
 

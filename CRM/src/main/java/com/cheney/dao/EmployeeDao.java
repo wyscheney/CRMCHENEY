@@ -59,6 +59,13 @@ public interface EmployeeDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> queryAllEmployee();
+	/**
+	 * 根据用户名字和电话查询是否有这个用户.
+	 * @param username
+	 * @param phoneNo
+	 * @return
+	 */
+	public Employee queryEmployee(@Param("username")String username,@Param("phoneNo")String phoneNo);
 	
 	
 	

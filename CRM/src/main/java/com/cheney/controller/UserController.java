@@ -36,7 +36,7 @@ public class UserController {
 	@RequestMapping("login")
 	public @ResponseBody String login(HttpServletRequest request,String username,String pass){
 		Employee user = userBiz.login(username, pass);
-		
+		System.out.println(pass);
 		if(user !=null){
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
@@ -74,7 +74,11 @@ public class UserController {
 		return json;
 	}
 	
-	
+	@RequestMapping("reqResetPass")
+	public @ResponseBody String reqResetPass(String username,String phoneNo){
+		int count = userBiz.reqResetPass(username,phoneNo);
+		return count+"";
+	}
 	
 	
 	

@@ -42,7 +42,6 @@ public class UserManagerController {
 		try {
 			json=mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return json;
@@ -59,7 +58,6 @@ public class UserManagerController {
 		try {
 			json=mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -88,7 +86,6 @@ public class UserManagerController {
 		try {
 			json=mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -98,7 +95,6 @@ public class UserManagerController {
 	@RequestMapping("resetPass")
 	public @ResponseBody String resetPass(Resetpass resetPass){
 		
-		//System.out.println(resetPass);
 		int count = resetPassBiz.resetPass(resetPass);
 		return count +"";
 	}

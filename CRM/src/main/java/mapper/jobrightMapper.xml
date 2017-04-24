@@ -3,7 +3,8 @@
 <mapper namespace="com.cheney.dao.JobRightDao" >
   <resultMap id="JobrightResultMap" type="JobRight" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="jobInfoId" property="jobInfoId" jdbcType="INTEGER" />
+    <result column="jobinfoId" property="jobinfoId" jdbcType="INTEGER" />
+    <result column="rightId" property="rightId" jdbcType="INTEGER" />
 		<collection property="rights" javaType="com.cheney.entity.Rights">
   			<id column="rid" property="rid" jdbcType="INTEGER" />
   			<result column="rightName" property="rightName" jdbcType="VARCHAR" />
@@ -20,6 +21,25 @@
   	j.jobinfoid = #{id}
 
   </select>
+  
+  <select id="query" parameterType="com.cheney.entity.JobRight"  resultMap="JobrightResultMap">
+  SELECT * FROM jobright
+  <where>
+  jobinfoId =#{jobinfoId}
+  AND rightId =#{rightId}
+  </where>
+  </select>
+  <insert id="insert" parameterType="com.cheney.entity.JobRight">
+  INSERT INTO jobright(
+  jobinfoId,
+  rightId
+  )VALUES(
+  #{jobinfoId},
+  #{rightId}
+  )
+  
+  
+  </insert>
   
   
   

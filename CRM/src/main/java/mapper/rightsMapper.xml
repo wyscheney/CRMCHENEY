@@ -13,4 +13,7 @@
   	SELECT rid,rightName,url,pid
   	FROM RIGHTS
   </select>
+
+  
+  
 </mapper>

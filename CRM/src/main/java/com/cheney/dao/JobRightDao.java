@@ -11,4 +11,17 @@ public interface JobRightDao {
 	
 	
 	public List<JobRight> selectByRid(@Param("id")Integer id);
+	/**
+	 * 根据jobRight查询
+	 * @param jobRight
+	 * @return
+	 */
+	public JobRight query(JobRight jobRight);
+	
+	/**
+	 * 添加权限对照表
+	 * @param jobRight
+	 * @return
+	 */
+	public int insert(JobRight jobRight);
 }
