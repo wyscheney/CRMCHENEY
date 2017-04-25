@@ -14,7 +14,7 @@
 	<div id="rightToolbar" style="margin: 0 auto">
 		<span style="font-size: 18;font-weight: bold;margin-left: 20px">功能导航：</span><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="false" onclick="javascript:$('#rt-dlg').dialog('open').dialog('center').dialog('setTitle','新增权限');" style="height: 32px">&nbsp;新增权限&nbsp; </a> 
 		<span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="false" onclick="javascript:queryRirhts()" style="height: 32px">&nbsp;查询权限&nbsp;</a></span>
-		<span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lock" plain="false" onclick="javascript:queryRirhts()" style="height: 32px">&nbsp;绑定权限&nbsp;</a></span>
+		<!-- <span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lock" plain="false" onclick="javascript:queryRirhts()" style="height: 32px">&nbsp;绑定权限&nbsp;</a></span> -->
 	</div>
 
 	<script type="text/javascript">
@@ -67,7 +67,7 @@
 		}
 
 		function format(value,row){
-			if(row.rid==1){
+			if(row.rid==row.pid){
 				return '一级权限'
 			}else{
 				return '二级权限'
@@ -115,15 +115,15 @@
 	<div id="rt-query"  class="easyui-panel" closed="true">
 		
 		<div id="rt-toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#rt-dg').edatagrid('saveRow')">保存修改</a>
+        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#rt-dg').edatagrid('saveRow')">保存修改</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#rt-dg').edatagrid('cancelRow')">退出编辑</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#rt-dg').edatagrid('destroyRow')">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#rt-dg').edatagrid('destroyRow')">删除</a> -->
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-large-clipart" plain="true"
-					onclick="openAllotDlg()">绑定权限</a>
+					onclick="openAllotDlg()">查看及绑定职位</a>
     </div>
 	<table id="rt-dg" style="width:600px;height:600px;" 
 			title="查询结果"
-			singleSelect="true"
+			singleSelect="false"
 			toolbar="#rt-toolbar"
 			autoSave="false"
 			idField="rid"
@@ -171,7 +171,7 @@
 		function openAllotDlg() {
 			var row = $('#rt-dg').datagrid('getSelected');
 			if (row == null) {
-				$.messager.alert('Sorry', '请选择客户!', 'warning');
+				$.messager.alert('Sorry', '请选择职位!', 'warning');
 			} else {
 				$('#jobinfoId').combobox({
 					url : 'queryAllJobs.do',

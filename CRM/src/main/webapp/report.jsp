@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var id=$("#uid").val();
 				var type=$('#outType').combobox('getValue');
 				if(jobId=='7'){
-					window.location.href="exportCustom.do?type"+type;
+					window.location.href="exportCustom.do?type="+type;
 				}else if(jobId=='5'||jobId=='8'){
 					window.location.href="exportCustomInfo.do?type"+type+"&followManId="+id;
 				}else if(jobId=='3'){

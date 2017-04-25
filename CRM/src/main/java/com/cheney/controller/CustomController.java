@@ -1,5 +1,8 @@
 package com.cheney.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.cheney.constant.CustomStatu;
 import com.cheney.entity.Custom;
@@ -22,6 +27,7 @@ import com.cheney.service.ConsultRecordBiz;
 import com.cheney.service.CustomBiz;
 import com.cheney.service.CustomInfoBiz;
 import com.cheney.service.UserBiz;
+import com.cheny.utils.CustomExcelIn;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.fabric.xmlrpc.base.Data;
@@ -128,5 +134,19 @@ public class CustomController {
 		return count>0?"1":"0";
 	}
 	
-
+	@RequestMapping("batchImportCustom")
+	public @ResponseBody String batchImportCustom(@RequestParam("file") CommonsMultipartFile file){
+		CustomExcelIn exceReader = new CustomExcelIn();
+		int count = 0;
+		try {
+			InputStream is = file.getInputStream();
+			List<Custom> list = exceReader.readExcelContent(is);
+			count = customBiz.insertCustoms(list);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count>0?"1":"0";
+	}
+	
 }

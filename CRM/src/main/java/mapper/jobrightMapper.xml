@@ -13,6 +13,14 @@
   		</collection>
   </resultMap>
   
+  <resultMap type="java.util.Map" id="jobRightResult">
+  <id column="id" property="id" jdbcType="INTEGER" />
+  <result column="rightName" property="rightName" jdbcType="VARCHAR" />
+  
+  
+  </resultMap>
+  
+  
   <select id="selectByRid" resultMap="JobrightResultMap">
   	SELECT J.id,R.rid,R.rightName,R.url,R.pid
   	FROM jobright J
@@ -41,6 +49,16 @@
   
   </insert>
   
+  <select id="queryByJobinfoId" resultMap="jobRightResult">
+  select j.id,r.rightName FROM jobright j
+  LEFT JOIN rights r ON j.rightId = r.rid
+  where 
+  jobinfoId =#{jobinfoId}
+  </select>
   
-  
+  <delete id="deleteById">
+  DELETE FROM jobright
+  WHERE
+  id = #{id}
+  </delete>
 </mapper>

@@ -22,19 +22,36 @@ public class CustomConsultController {
 	
 	@Resource
 	private ConsultRecordBiz consultRecordBiz;
-	
+	/**
+	 * 分页暂时使用sublist来替代,实际使用可以把page和rows传入后台,用limit控制.把fromIndex和toIndex传入
+	 * @param consultManId
+	 * @param customName
+	 * @param customPhoneNo
+	 * @param consultDate
+	 * @param endDate
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping(value="queryRecord",produces="application/json; charset=UTF-8")
-	public @ResponseBody String queryRecord(Integer consultManId,String customName,String customPhoneNo,Date consultDate,Date endDate){
+	public @ResponseBody String queryRecord(Integer consultManId,String customName,String customPhoneNo,Date consultDate,Date endDate,Integer page,Integer rows){
 		
 		List<Map<String, Object>> maps = consultRecordBiz.queryRecordMap(consultManId, customName, customPhoneNo, consultDate, endDate);
+		int fromIndex = (page-1)*rows;
+		int toIndex =page*rows;
+		if(toIndex>maps.size()){
+			toIndex=maps.size();
+		}
+		List<Map<String, Object>> subList = maps.subList(fromIndex, toIndex);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 		mapper.setDateFormat(sdf); 
 		String json="";
 		try {
-			json=mapper.writeValueAsString(maps);
+			json=mapper.writeValueAsString(subList);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return json;

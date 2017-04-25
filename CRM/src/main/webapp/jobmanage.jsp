@@ -56,7 +56,8 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#job-dg').edatagrid('saveRow')">保存修改</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#job-dg').edatagrid('cancelRow')">退出编辑</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#job-dg').edatagrid('destroyRow')">删除</a>
-         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="javascript:$('#job-query').panel('close')">退出</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="javascript:$('#job-query').panel('close')">退出</a>
+    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-large-clipart" plain="true" onclick="openAllotDlg()">删除权限</a>
     </div>
 	
 	
@@ -67,7 +68,9 @@
 			singleSelect="true"
 			toolbar="#job-toolbar"
 			autoSave="false"
-			idField="id">
+			idField="id"
+			fitColumns="true"
+			>
 		<thead>
 			<tr>
 				<th field="id" width="100" align="center">职位编号</th>
@@ -85,6 +88,23 @@
 	</div>
 	</div>
 	
+	<div id="jobRight-dlg" class="easyui-dialog" style="width:400px;padding-left: 10px"
+		buttons="#jobRight-dlg-buttons" closed="true" closable="true" modal="false" title='请选择职位'>
+		<form id="jobRight-ff" method="post">
+			<div>
+				<p>
+					<label for="rightId" class="label-top">请选择职位:</label> <input id="rightId"
+						name="rightId" style="height: 32px;width: 100px" />
+				</p>
+			</div>
+		</form>
+		<div id="jobRight-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"
+				onclick="allotjobRight()" style="width:90px">确认删除</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" iconCls="icon-cancel"
+				onclick="javascript:$('#jobRight-dlg').dialog('close')" style="width:90px">取消</a>
+		</div>
+	</div>
 	
 	
 	
@@ -165,7 +185,45 @@ function queryJobs() {
 		
 	})}
 
+/* 打开解除职位对话框 */
+function openAllotDlg() {
+	var row = $('#job-dg').datagrid('getSelected');
+	if (row == null) {
+		$.messager.alert('Sorry', '请选择职位!', 'warning');
+	} else {
+		$('#rightId').combobox({
+			url : 'queryRights.do?jobinfoId='+row.id,
+			valueField : 'id',
+			textField : 'rightName',
+			panelHeight : 'auto',
+			editable : false,
 
+		})
+		$('#jobRight-dlg').dialog('open');
+	}
+}
+
+/* 分配职位 */
+function allotjobRight() {
+	var row = $('#job-dg').datagrid('getSelected');
+	alert(row.id);
+	if ($("#rightId").combobox('getValue') != '') {
+		$('#jobRight-ff').form('submit', {
+			url : 'removeRights.do',
+			success : function(data) {
+				if (data == 1) {
+					$('#jobRight-dlg').dialog('close')
+					$.messager.alert('OK', "权限移除成功!", 'info');
+					$('#rt-dg').datagrid('reload');
+				} else{
+					$.messager.alert('Sorry', '权限移除失败!', 'error');
+				}
+			}
+		});
+	} else {
+		$.messager.alert('Sorry', '请选择权限!', 'warnning');
+	}
+}
 
 </script>
 

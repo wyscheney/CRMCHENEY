@@ -44,7 +44,6 @@ public class RightsController {
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
 		}
 		
 		
@@ -60,6 +59,29 @@ public class RightsController {
 		return count+"";
 	}
 	
+	@RequestMapping(value="queryRights",produces = "application/json; charset=utf-8")
+	public @ResponseBody String queryRights(String jobinfoId){
+		
+		List<Map<String, Object>> map = jobRightBiz.queryJobRightByJobinfoId(jobinfoId);
+		ObjectMapper mapper =new ObjectMapper();
+		String Json=null;
+		try {
+			Json = mapper.writeValueAsString(map);
+			System.out.println(Json);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		}
+		return Json;
+	}
+	
+	@RequestMapping("removeRights")
+	public @ResponseBody String removeRights(Integer rightId){
+		int count = jobRightBiz.removeById(rightId);
+		
+		return count+"";
+	}
 	
 	
 }

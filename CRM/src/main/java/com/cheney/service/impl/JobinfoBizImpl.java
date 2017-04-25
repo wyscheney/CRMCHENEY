@@ -32,4 +32,14 @@ public class JobinfoBizImpl implements JobinfoBiz {
 		return count;
 	}
 
+	public int update(Jobinfo jobinfo) {
+		
+		return jobinfoDao.update(jobinfo);
+	}
+
+	public int delete(Integer id) {
+		
+		return jobinfoDao.delete(id);
+	}
+
 }

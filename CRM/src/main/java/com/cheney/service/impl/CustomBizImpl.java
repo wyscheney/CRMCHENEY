@@ -95,4 +95,21 @@ public class CustomBizImpl implements CustomBiz {
 		return count;
 	}
 
+
+	public int insertCustoms(List<Custom> customs) {
+		
+		return customDao.insertCustoms(customs);
+	}
+
+
+	public List<Custom> queryCustombyType(Integer type) {
+		if(type==1){
+			return customDao.queryCustomByWeek();
+		}else if(type==2){
+			return customDao.queryCustomByMonth();
+		}else{
+			return customDao.queryAllCustom();
+		}
+	}
+
 }

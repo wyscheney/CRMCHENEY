@@ -2,6 +2,7 @@ package com.cheney.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cheney.entity.Custom;
@@ -38,4 +39,25 @@ public interface CustomDao {
 	 * @return
 	 */
 	public int updateTOSalse(Integer[] ids);
+	
+	/**
+	 * 批量插入客户信息
+	 * @param customs
+	 * @return
+	 */
+	public int insertCustoms(@Param("customs")List<Custom> customs);
+	
+	public List<Custom> queryAllCustom();
+	
+	/**
+	 * 查询本周客户信息.
+	 * @return
+	 */
+	public List<Custom> queryCustomByWeek();
+	/**
+	 * 查询本月客户信息
+	 * @return
+	 */
+	public List<Custom> queryCustomByMonth();
+	
 }

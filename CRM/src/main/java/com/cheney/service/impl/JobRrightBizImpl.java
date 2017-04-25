@@ -2,6 +2,7 @@ package com.cheney.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,6 +42,16 @@ public class JobRrightBizImpl implements JobRightBiz {
 		}
 		
 		return count;
+	}
+
+	public List<Map<String, Object>> queryJobRightByJobinfoId(String jobinfoId) {
+		
+		return jobRightDao.queryByJobinfoId(jobinfoId);
+	}
+
+	public int removeById(Integer rightId) {
+		
+		return jobRightDao.deleteById(rightId);
 	}
 
 }

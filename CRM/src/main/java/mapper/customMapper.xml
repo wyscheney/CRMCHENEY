@@ -114,8 +114,47 @@
   	</where>
   
   </update>
+  <insert id="insertCustoms">
+  insert into custom(
+  			name,
+  			education,
+  			phoneNo,
+  			qq,
+  			email,
+  			customStatu,
+  			createDate,
+  			inviteName
+  		)
+  		VALUES
+  		
+  		<foreach collection="customs" item="custom" separator=",">
+  		(#{custom.name},
+  		#{custom.education},
+  		#{custom.phoneNo},
+  		#{custom.qq},
+  		#{custom.email},
+  		#{custom.customStatu},
+  		#{custom.createDate},
+  		#{custom.inviteName})
+  		</foreach>
+  	</insert>
+  
+  <select id="queryAllCustom" resultMap="CustomResultMap">
+  SELECT * FROM 
+  custom
+  </select>
   
   
+  <select id="queryCustomByWeek" resultMap="CustomResultMap">
+   	SELECT * FROM custom 
+ 	WHERE YEARWEEK(date_format(createDate,'%Y-%m-%d'))  = YEARWEEK(now())
+  </select>
+  
+  <select id="queryCustomByMonth" resultMap="CustomResultMap">
+  	SELECT * FROM custom 
+ 	WHERE date_format(createDate,'%Y-%m')=date_format(now(),'%Y-%m')
+  
+  </select>
   
   
 </mapper>

@@ -18,5 +18,19 @@ public interface JobinfoBiz {
 	 * @return
 	 */
 	public int insert(Jobinfo jobinfo);
+	/**
+	 * 修改jobinfo
+	 * 
+	 * @param jobinfo
+	 * @return
+	 */
+	public int update(Jobinfo jobinfo);
+	
+	/**
+	 * 删除jobinfo
+	 * @param id
+	 * @return
+	 */
+	public int delete(Integer id);
 	
 }

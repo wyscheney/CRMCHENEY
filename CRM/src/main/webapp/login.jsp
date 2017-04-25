@@ -9,7 +9,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>oracleoaec客户关系管理系统</title>
+<title>客户关系管理系统</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -26,14 +26,14 @@
 	<div data-options="region:'south',border:false"
 		style="height:50px;background:#FFFFFF;padding:10px;">
 		<div align="center" style="margin-top: 10px">
-			&copy;<a href="http://www.oracleoaec.net/">2016 上海海文信息技术有限公司</a>
+			&copy;<a href="http://www.oracleoaec.net/">2017 做个爱学习的coder</a>
 		</div>
 	</div>
 	<div data-options="region:'center'" style="background-image:url('images/backgroud.png');padding-top: 10%">
 		<div align="center">
 			<div class="easyui-panel" style="width:100%;max-width:600px;">
 				<div style="float: left;margin-left: 40px;margin-top:30px;margin-bottom: 30px">
-					<img src="images/logo.png">
+					<img src="images/img2.png">
 				</div>
 				<div style="float: left;margin: 40px 10px;padding-left: 40px;">
 					<h2 align="center">用户登陆</h2>

@@ -13,6 +13,13 @@ public interface CustomBiz {
 	public int updateCustom(Custom custom);
 
 	public int allotCustom();
+
+	public int insertCustoms(List<Custom> list);
+	/**
+	 * 根据类型查找客户信息
+	 * @param type
+	 */
+	public List<Custom> queryCustombyType(Integer type);
 	
 
 }
