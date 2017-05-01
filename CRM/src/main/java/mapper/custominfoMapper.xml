@@ -29,7 +29,11 @@
 
  
  
- 
+ <select id="selectCustomInfo" resultMap="CustominfoResultMap">
+ 	SELECT * FROM CustomInfo
+ 	where
+ 	id=#{id}
+ </select>
  
   
   <insert id="addcustominfos" parameterType="Custominfo">

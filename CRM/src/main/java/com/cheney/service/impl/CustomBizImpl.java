@@ -43,7 +43,7 @@ public class CustomBizImpl implements CustomBiz {
 
 
 	public int updateCustom(Custom custom) {
-		
+		String customStatu = custom.getCustomStatu();
 		return customDao.updateCustom(custom);
 	}
 

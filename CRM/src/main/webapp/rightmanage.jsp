@@ -12,7 +12,7 @@
 	<h1>权限管理</h1>
 
 	<div id="rightToolbar" style="margin: 0 auto">
-		<span style="font-size: 18;font-weight: bold;margin-left: 20px">功能导航：</span><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="false" onclick="javascript:$('#rt-dlg').dialog('open').dialog('center').dialog('setTitle','新增权限');" style="height: 32px">&nbsp;新增权限&nbsp; </a> 
+		<!-- <span style="font-size: 18;font-weight: bold;margin-left: 20px">功能导航：</span><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="false" onclick="javascript:$('#rt-dlg').dialog('open').dialog('center').dialog('setTitle','新增权限');" style="height: 32px">&nbsp;新增权限&nbsp; </a>  -->
 		<span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="false" onclick="javascript:queryRirhts()" style="height: 32px">&nbsp;查询权限&nbsp;</a></span>
 		<!-- <span style="margin-left: 30px"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lock" plain="false" onclick="javascript:queryRirhts()" style="height: 32px">&nbsp;绑定权限&nbsp;</a></span> -->
 	</div>
@@ -133,9 +133,13 @@
 				<th field="rid" width="100" align="center">权限编号</th>
 				<th field="rightName" width="150"  align="center" editor="type:'validatebox',options:{required:true}">权限名称</th>
 				<th field="rightType" width="100" align="center" 
-				formatter="format"   editor="{type:'combobox',options:{data:[{'rightType':'1','text':'一级权限'},{'rightType':'2','text':'二级权限'}],valueField:'rightType',textField:'text'}}">权限等级</th>
+				formatter="format" >权限等级</th>
 				<th field="url" width="100"  align="center" editor="type:'validatebox',options:{required:true}" >url</th>
-				<th field="pid" width="100" align="center" editor="{type:'numberbox',options:{precision:0}}">所属权限</th>
+				<th field="pid" width="100" align="center">所属权限</th>
+				<!-- <th field="pid" width="100" align="center" editor="{type:'numberbox',options:{precision:0}}">所属权限</th> -->
+			<!-- <th field="rightType" width="100" align="center" 
+				formatter="format"   editor="{type:'combobox',options:{data:[{'rightType':'1','text':'一级权限'},{'rightType':'2','text':'二级权限'}],valueField:'rightType',textField:'text'}}">权限等级</th>
+			 -->
 			</tr>
 		</thead>
 		<tbody>

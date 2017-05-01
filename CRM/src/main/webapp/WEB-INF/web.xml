@@ -11,7 +11,10 @@
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:applicationContext.xml</param-value>
   </context-param>
-  
+    <filter>  
+    <filter-name>PagesFilter</filter-name>  
+    <filter-class>ccom.cheney.filter.PageFilter</filter-class>  
+  </filter>
   <!-- 全局编码过滤器 -->
   <filter>
   	<filter-name>CharacterEncodingFilter</filter-name>
@@ -25,6 +28,11 @@
   	<filter-name>CharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <filter-mapping>  
+    <filter-name>PagesFilter</filter-name>  
+    <url-pattern>*</url-pattern>    
+  </filter-mapping>  
   
   <!-- spring配置文件监听器 -->
   <listener>

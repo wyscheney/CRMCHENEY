@@ -53,9 +53,8 @@ public class CustomdevController {
 		
 		if(coustominfo.getPlanDate()==null){
 			coustominfo.setPlanDate(new Date());
-			coustominfo.setLastFollowDate(new Date());
-			
 		}
+		coustominfo.setLastFollowDate(new Date());
 		int count = customInfoBiz.updateCustomInfo(coustominfo);
 			
 		return count+"";

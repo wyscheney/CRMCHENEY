@@ -69,7 +69,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<body class=\"easyui-layout\">\r\n");
       out.write("\t<div data-options=\"region:'north',border:false\" style=\"height:80px;background:#FFFFFF;padding:10px\">\r\n");
       out.write("\t\t<div align=\"center\"  style=\"padding-top: 10px\">\r\n");
-      out.write("\t\t\t<img src=\"images/banner.png\">\r\n");
+      out.write("\t\t\t<img src=\"images/oracle.png\">\r\n");
       out.write("\t\t</div>\r\n");
       out.write("\t</div>\r\n");
       out.write("\t<div data-options=\"region:'south',border:false\"\r\n");

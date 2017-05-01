@@ -66,6 +66,12 @@ public class UserBizImpl implements UserBiz{
 
 	public int cancleUser(String username) {
 		Employee employee = employeeDao.selectEmployee(username, null, null);
+		if(employee==null){
+				return 0;
+		}else if("0".equals(employee.getWorkStatu())){
+			return 2;
+		}
+		
 		employee.setWorkStatu("0");
 		return employeeDao.updateUser(employee);
 	}

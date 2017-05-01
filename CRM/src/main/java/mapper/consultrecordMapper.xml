@@ -125,12 +125,26 @@
 		</if>
 	
 	</where>
-	
-	
-	
-	
 	</select>
 	
+	<update id="updateRecord" parameterType="com.cheney.entity.ConsultRecord">
+	UPDATE consultrecord
+	<set>
+	consultStatu=#{consultStatu}
+	</set>
+	<where>
+	id=#{id}
+	</where>
+	
+	
+	
+	
+	
+	
+	
+	</update>
+
+
 
 
 </mapper>

@@ -98,7 +98,7 @@ public class CustomController {
 	//修改客户信息
 	@RequestMapping("updateCustom")
 	public @ResponseBody String updateCustom(Custom custom){
-		System.out.println(custom);
+		
 		int count = customBiz.updateCustom(custom);
 		return count+"";
 	}

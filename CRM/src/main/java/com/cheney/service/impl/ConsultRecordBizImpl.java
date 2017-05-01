@@ -63,24 +63,24 @@ public class ConsultRecordBizImpl implements ConsultRecordBiz {
 
 
 	public int updateRecord(ConsultRecord consultRecord) {
+		String consultStatu = consultRecord.getConsultStatu();
 		
+		if(ConsultStatu.DEAD_ORDER.equals(consultStatu)){
+			Custom custom =new Custom();
+			custom.setId(consultRecord.getCustomId());
+			custom.setCustomStatu(CustomStatu.JUNK);
+			customDao.updateCustom(custom);
+		}
 		return consultRecordDao.updateRecord(consultRecord);
 	}
 
 
 	public int addResult(Integer id, String result) {
-		
 		return consultRecordDao.addResult(id,result);
 	}
 
 
 	public Map<String, Object> selectCountByConsultManId(Integer[] consultManId,Integer departmentId) {
-		/*<th field="newAllot" width="100" align="center">新增客户数</th>
-		<th field="following" width="100" align="center">紧跟客户数</th>
-		<th field="signed" width="100" align="center">已报名客户数</th>
-		<th field="denied" width="100" align="center">死单客户数</th>
-		<th field="refundment" width="100" align="center">报名后退费客户数</th>
-		<th field="total" width="100" align="center">总分配客户数</th>*/
 		if(departmentId!=null){
 			Integer[] ids = employeeDao.queryIdsByDeptId(departmentId);
 			consultManId=ids;
@@ -101,7 +101,6 @@ public class ConsultRecordBizImpl implements ConsultRecordBiz {
 		map.put("refundment", refundment);
 		map.put("total", total);
 		map.put("signed", signed);
-		
 		return map;
 	}
 

@@ -206,7 +206,7 @@ function openAllotDlg() {
 /* 分配职位 */
 function allotjobRight() {
 	var row = $('#job-dg').datagrid('getSelected');
-	alert(row.id);
+	//alert(row.id);
 	if ($("#rightId").combobox('getValue') != '') {
 		$('#jobRight-ff').form('submit', {
 			url : 'removeRights.do',

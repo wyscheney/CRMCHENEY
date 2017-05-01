@@ -43,4 +43,7 @@ public interface CustominfoDao {
 	 */
 	public int selectCountByStatu(@Param("statu")String statu,@Param("followManId")Integer[] followManId);
 	
+	
+	
+	public Custominfo selectCustomInfo(@Param("id")Integer id);
 }

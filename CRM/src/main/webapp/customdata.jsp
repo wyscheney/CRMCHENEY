@@ -29,7 +29,6 @@
 			style="height: 32px">新增单个客户</a> <span style="margin-left: 30px">
 			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-man'"
 			style="height: 32px" onclick="javascript:$('#import-dlg').dialog('open')">excel批量导入</a></span>
-			
 	</div>
 	
 	<div style="margin-left: 20px;margin-bottom: 40px">

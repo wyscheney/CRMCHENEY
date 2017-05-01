@@ -10,8 +10,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.cheney.constant.CustomInfoStatu;
+import com.cheney.constant.CustomStatu;
+import com.cheney.dao.CustomDao;
 import com.cheney.dao.CustominfoDao;
 import com.cheney.dao.EmployeeDao;
+import com.cheney.entity.Custom;
 import com.cheney.entity.Custominfo;
 import com.cheney.entity.Employee;
 import com.cheney.service.CustomInfoBiz;
@@ -19,6 +22,8 @@ import com.cheney.service.CustomInfoBiz;
 public class CustomInfoBizImpl implements CustomInfoBiz{
 	@Resource
 	private CustominfoDao custominfoDao;
+	@Resource
+	private CustomDao customDao;
 	@Resource
 	private EmployeeDao employeeDao;
 	
@@ -28,6 +33,16 @@ public class CustomInfoBizImpl implements CustomInfoBiz{
 	}
 
 	public int updateCustomInfo(Custominfo coustominfo) {
+		String statu = coustominfo.getStatu();
+		
+		if(CustomInfoStatu.DENIED.equals(statu)){
+			Custom custom =new Custom();
+			Custominfo ci = custominfoDao.selectCustomInfo(coustominfo.getId());
+			custom.setId(ci.getCustomId());
+			custom.setCustomStatu(CustomStatu.JUNK);
+			customDao.updateCustom(custom);
+		}
+		
 		
 		return custominfoDao.updateCustomInfo(coustominfo);
 	}

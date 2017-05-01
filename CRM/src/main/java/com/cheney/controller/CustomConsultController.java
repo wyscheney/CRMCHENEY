@@ -58,7 +58,7 @@ public class CustomConsultController {
 	}
 	
 	@RequestMapping("updateRecord")
-	public String updateRecord(ConsultRecord consultRecord){
+	public @ResponseBody String updateRecord(ConsultRecord consultRecord){
 		int count =consultRecordBiz.updateRecord(consultRecord);
 		return count+"";
 		
